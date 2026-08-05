@@ -48,7 +48,7 @@ Route::get('kuesioner', 'KuesionerController@index')->name('kuesioner');
 Route::get('kelurahan/{id}', 'KelurahanController@getKelByKec');
 
 
-Route::any('/', 'HomeController@index')->name('any');
+Route::get('/', function () { return view('spa'); })->name('spa');
 
 // Auth::routes();
 
@@ -88,3 +88,6 @@ Route::get('config/TahunAdd', 'TahunController@showRegisterForm');
 Route::post('config/TahunAdd', 'TahunController@store');
 
 */
+
+// Keep this last so browser refreshes on SPA routes render the client.
+Route::get('/{any}', function () { return view('spa'); })->where('any', '^(?!api).*$');
